@@ -1,5 +1,5 @@
-require.paths.unshift('.npm/.cache/express/1.0.0rc/package/lib')
-require.paths.unshift('.npm/.cache/connect/0.2.3/package/lib')
+require.paths.unshift('vendor/.npm/.cache/express/1.0.0rc/package/lib')
+require.paths.unshift('vendor/.npm/.cache/connect/0.2.3/package/lib')
 
 app = require("express").createServer()
 
