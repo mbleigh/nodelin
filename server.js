@@ -1,7 +1,8 @@
 (function() {
   var app;
+  require('sys');
   require.paths.unshift('vendor/.npm/.cache/express/1.0.0rc/package/lib');
-  require.paths.unshift('vendor/.npm/.cache/connect/0.2.3/package/lib');
+  require.paths.unshift('vendor/  .npm/.cache/connect/0.2.3/package/lib');
   app = require("express").createServer();
   app.get("/", function(req, res) {
     return res.send("Hello world");
