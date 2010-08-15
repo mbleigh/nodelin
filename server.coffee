@@ -5,6 +5,6 @@ app = require("express").createServer()
 
 app.get "/", (req,res)-> res.send "Hello world"
 
-app.listen (process.env.PORT || 8000)
+app.listen parseInt(process.env.PORT) || 8000
 
 puts "Up and running on #{process.env.PORT || 8000}..."
