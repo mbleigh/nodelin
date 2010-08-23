@@ -1,0 +1,1 @@
+{"name":"ejs","description":"Embedded JavaScript templates","version":"0.2.0","author":{"name":"TJ Holowaychuk","email":"tj@vision-media.ca"},"keywords":["template","engine"],"main":"./lib/ejs","_id":"ejs-0.2.0","engines":{"node":"*"},"_nodeSupported":true}

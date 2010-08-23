@@ -1,0 +1,1 @@
+{"name":"connect-redis","description":"Redis session store for Connect","version":"0.0.2","author":{"name":"TJ Holowaychuk","email":"tj@vision-media.ca"},"directories":{"lib":"."},"engines":{"node":">= 0.1.98"},"_id":"connect-redis-0.0.2","_nodeSupported":true}

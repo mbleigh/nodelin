@@ -1,0 +1,6 @@
+{ "name" : "oauth"
+, "version" : "0.8.0"
+, "directories" : { "lib" : "./lib" }
+, "main" : "main.js"
+, "author" : "Ciaran Jessup"
+}
