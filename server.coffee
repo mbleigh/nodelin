@@ -1,18 +1,12 @@
-sys = require 'sys'
-require.paths.unshift 'vendor/.npm/.cache/express/1.0.0rc/package/lib'
-require.paths.unshift 'vendor/.npm/.cache/connect/0.2.3/package/lib'
-require.paths.unshift 'vendor/.npm/.cache/oauth/0.8.0/package/lib'
-require.paths.unshift 'vendor/.npm/.cache/connect-auth/0.1.2/package/lib'
-require.paths.unshift 'vendor/.npm/.cache/connect-redis/0.0.2/package/lib'
-require.paths.unshift 'vendor/.npm/ejs/0.2.0/package/lib'
+require.paths.unshift "vendor/.npm/#{lib}/active/package/lib" for lib in ['oauth', 'ejs', 'connect', 'express']
 
-auth = require 'connect-auth'
+sys = require 'sys'
 oauth = require 'oauth'
 url = require 'url'
-RedisStore = require 'connect-redis'
-redis = require("./vendor/redis/redis-client").createClient REDIS_PORT, REDIS_HOST
+redis = require('./vendor/redis').createClient REDIS_PORT, REDIS_HOST
 connect = require 'connect'
 express = require 'express'
+ejs = require 'ejs'
 
 # Get Redis up and running.
 [REDIS_PASS, REDIS_HOST, REDIS_PORT] = [process.env.REDIS_PASS, 'goosefish.redistogo.com', 9256]
