@@ -1,24 +1,25 @@
 (function() {
-  var REDIS_HOST, REDIS_PASS, REDIS_PORT, Twitter, _a, _b, _c, _d, app, connect, ejs, express, lib, oauth, redis, sys, url;
+  var RedisCredentials, Twitter, _a, _b, _c, app, connect, ejs, express, lib, oauth, redis, sys, url;
   _b = ['oauth', 'ejs', 'connect', 'express'];
   for (_a = 0, _c = _b.length; _a < _c; _a++) {
     lib = _b[_a];
     require.paths.unshift(("vendor/.npm/" + (lib) + "/active/package/lib"));
   }
+  RedisCredentials = {
+    host: process.env.REDIS_HOST,
+    pass: process.env.REDIS_PASS,
+    port: parseInt(process.env.REDIS_PORT)
+  };
   sys = require('sys');
   oauth = require('oauth');
   url = require('url');
-  redis = require('./vendor/redis').createClient(REDIS_PORT, REDIS_HOST);
   connect = require('connect');
   express = require('express');
   ejs = require('ejs');
-  _d = [process.env.REDIS_PASS, 'goosefish.redistogo.com', 9256];
-  REDIS_PASS = _d[0];
-  REDIS_HOST = _d[1];
-  REDIS_PORT = _d[2];
+  redis = require('./vendor/redis').createClient(RedisCredentials.port, RedisCredentials.host);
   Twitter = new oauth.OAuth('http://api.twitter.com/oauth/request_token', 'http://api.twitter.com/oauth/access_token', process.env.TWITTER_KEY, process.env.TWITTER_SECRET, '1.0', null, 'HMAC-SHA1');
-  if (REDIS_PASS) {
-    redis.auth(REDIS_PASS);
+  if (RedisCredentials.pass) {
+    redis.auth(RedisCredentials.pass);
   }
   app = express.createServer(connect.cookieDecoder(), connect.session());
   app.set('view engine', 'ejs');

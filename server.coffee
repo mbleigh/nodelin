@@ -1,18 +1,20 @@
 require.paths.unshift "vendor/.npm/#{lib}/active/package/lib" for lib in ['oauth', 'ejs', 'connect', 'express']
 
+RedisCredentials =
+  host: process.env.REDIS_HOST,
+  pass: process.env.REDIS_PASS,
+  port: parseInt(process.env.REDIS_PORT)
+  
 sys = require 'sys'
 oauth = require 'oauth'
 url = require 'url'
-redis = require('./vendor/redis').createClient REDIS_PORT, REDIS_HOST
 connect = require 'connect'
 express = require 'express'
 ejs = require 'ejs'
-
-# Get Redis up and running.
-[REDIS_PASS, REDIS_HOST, REDIS_PORT] = [process.env.REDIS_PASS, 'goosefish.redistogo.com', 9256]
+redis = require('./vendor/redis').createClient RedisCredentials.port, RedisCredentials.host
 
 Twitter = new oauth.OAuth('http://api.twitter.com/oauth/request_token', 'http://api.twitter.com/oauth/access_token', process.env.TWITTER_KEY, process.env.TWITTER_SECRET, '1.0', null, 'HMAC-SHA1')
-redis.auth(REDIS_PASS) if REDIS_PASS
+redis.auth(RedisCredentials.pass) if RedisCredentials.pass
 
 app = express.createServer connect.cookieDecoder(), connect.session()
 app.set 'view engine', 'ejs'
