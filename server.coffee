@@ -1,16 +1,19 @@
-require.paths.unshift "vendor/.npm/#{lib}/active/package/lib" for lib in ['oauth', 'ejs', 'connect', 'express']
-
+# require.paths.unshift "vendor/.npm/#{lib}/active/package/lib" for lib in ['oauth', 'ejs', 'connect', 'express']
+vrequire = (lib)->
+  require.paths.unshift "vendor/.npm/#{lib}/active/package/lib"
+  require lib
+  
 RedisCredentials =
   host: process.env.REDIS_HOST,
   pass: process.env.REDIS_PASS,
   port: parseInt(process.env.REDIS_PORT)
   
 sys = require 'sys'
-oauth = require 'oauth'
+oauth = vrequire 'oauth'
 url = require 'url'
-connect = require 'connect'
-express = require 'express'
-ejs = require 'ejs'
+connect = vrequire 'connect'
+express = vrequire 'express'
+ejs = vrequire 'ejs'
 redis = require('./vendor/redis').createClient RedisCredentials.port, RedisCredentials.host
 
 Twitter = new oauth.OAuth('http://api.twitter.com/oauth/request_token', 'http://api.twitter.com/oauth/access_token', process.env.TWITTER_KEY, process.env.TWITTER_SECRET, '1.0', null, 'HMAC-SHA1')

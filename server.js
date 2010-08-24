@@ -1,21 +1,20 @@
 (function() {
-  var RedisCredentials, Twitter, _a, _b, _c, app, connect, ejs, express, lib, oauth, redis, sys, url;
-  _b = ['oauth', 'ejs', 'connect', 'express'];
-  for (_a = 0, _c = _b.length; _a < _c; _a++) {
-    lib = _b[_a];
+  var RedisCredentials, Twitter, app, connect, ejs, express, oauth, redis, sys, url, vrequire;
+  vrequire = function(lib) {
     require.paths.unshift(("vendor/.npm/" + (lib) + "/active/package/lib"));
-  }
+    return require(lib);
+  };
   RedisCredentials = {
     host: process.env.REDIS_HOST,
     pass: process.env.REDIS_PASS,
     port: parseInt(process.env.REDIS_PORT)
   };
   sys = require('sys');
-  oauth = require('oauth');
+  oauth = vrequire('oauth');
   url = require('url');
-  connect = require('connect');
-  express = require('express');
-  ejs = require('ejs');
+  connect = vrequire('connect');
+  express = vrequire('express');
+  ejs = vrequire('ejs');
   redis = require('./vendor/redis').createClient(RedisCredentials.port, RedisCredentials.host);
   Twitter = new oauth.OAuth('http://api.twitter.com/oauth/request_token', 'http://api.twitter.com/oauth/access_token', process.env.TWITTER_KEY, process.env.TWITTER_SECRET, '1.0', null, 'HMAC-SHA1');
   if (RedisCredentials.pass) {
